@@ -27,14 +27,15 @@ Então qual o primeiro passo? Escolher o namespace da sua aplicação. De acordo
 
 ### Helm
 Na sequencia é necessário instalar o [Helm](https://helm.sh/docs/using_helm/).
-Para isso use o comando: `brew install kubernetes-helm`.
+
+Para isso use o comando: `brew install kubernetes-helm`. Caso você esteja no Windows, você vai precisar do Chocolatey. Uma vez que você tenha o Choco instalado, basta usar o seguinte comando: `choco install kubernetes-helm`.
 
 Permissões para Helm. O Fusion permite a instalação de pacotes pelo Help usando um usuário que não seja admin, para configurar este usuário, você deverá olhar para o diretório `install-roles` no repositório e aplicar os arquivos de lá no seu repositório.
 
 (necessário pesquisar mais sobre o assunto e melhorar este trecho).
 
-#### Helm no Windows:
-Para instalar o Helm no Windows, você vai precisar do Chocolatey. Uma vez que você o Choco instalado, basta usar o seguinte comando: `choco install kubernetes-helm`.
+
+
 
 
 
