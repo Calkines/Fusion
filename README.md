@@ -5,7 +5,7 @@ Este repositório serve para ajudar pessoas que queiram aprender Fusion Server.
 
 Fusion é um sistema desenvolvido pela [Lucidworks](https://lucidworks.com/products/fusion/) para resolver situações onde é necessário realizar descoberta de dados com interligência artificial, aplicações de busca de maneira moderna, conteinerizada, e arquiteturalmente pensadas para nuvem.
 
-### Funcionalidade
+### Funcionalidades
 
 1. Navegação tranquila com Kubernetes
 2. Machine Learning em qualquer lugar
