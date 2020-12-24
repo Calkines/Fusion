@@ -196,6 +196,7 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
 
+
 #Recursos do Node group
   NodeInstanceRole:
     Type: "AWS::IAM::Role"
@@ -225,7 +226,7 @@ Resources:
   NodeSecurityGroup:
     Type: "AWS::EC2::SecurityGroup"    
     Properties:
-      GroupName: NodeSecurityGroup-${ClusterName}
+      GroupName: !Sub NodeSecurityGroup-${ClusterName}
       GroupDescription: Security group for all nodes in the cluster
       Tags:
         - Key: !Sub kubernetes.io/cluster/${ClusterName}
@@ -325,7 +326,7 @@ Resources:
             /etc/eks/bootstrap.sh ${ClusterName} ${BootstrapArguments}
             /opt/aws/bin/cfn-signal --exit-code $? \
                      --stack  ${AWS::StackName} \
-                     --resource NodeGroup  \
+                     --resource AutoScalingNodeGroup  \
                      --region ${AWS::Region}
         MetadataOptions:
           HttpPutResponseHopLimit : 2
@@ -334,8 +335,8 @@ Resources:
             - IMDSv1Disabled
             - required
             - optional
-
-  NodeGroup:
+  
+  AutoScalingNodeGroup:
     Type: "AWS::AutoScaling::AutoScalingGroup"
     Properties:
       DesiredCapacity: !Ref NodeAutoScalingGroupDesiredCapacity
@@ -359,6 +360,27 @@ Resources:
         PauseTime: PT5M
     DependsOn:
       - "eksItaonde"
+
+  EKSNodegroup:
+    Type: 'AWS::EKS::Nodegroup'
+    Properties:
+      ClusterName: !Ref ClusterName
+      NodeRole: !GetAtt NodeInstanceRole.Arn
+      LaunchTemplate: 
+        Id: !Ref NodeLaunchTemplate        
+        Version: !GetAtt NodeLaunchTemplate.LatestVersionNumber
+      Labels:
+        blabla: owned
+        Key2: Value2
+      Subnets:
+        - subnet-08f5242abb874cba6
+        - subnet-02180d691377426e2
+    DependsOn:
+      - "NodeInstanceRole"
+      - "NodeLaunchTemplate"
+      - "eksItaonde"
+
+
 
 Outputs:
 
@@ -384,5 +406,4 @@ Outputs:
 
   NodeAutoScalingGroup:
     Description: The autoscaling group
-    Value: !Ref NodeGroup
-
+    Value: !Ref AutoScalingNodeGroup
