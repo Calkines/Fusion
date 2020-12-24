@@ -308,9 +308,7 @@ Resources:
             Ebs:
               DeleteOnTermination: true
               VolumeSize: !Ref NodeVolumeSize
-              VolumeType: gp2
-        IamInstanceProfile:
-          Arn: !GetAtt NodeInstanceProfile.Arn
+              VolumeType: gp2        
         ImageId: !If
           - HasNodeImageId
           - !Ref NodeImageId
