@@ -1,7 +1,7 @@
 [
   {
     "ParameterKey":"ClusterControlPlaneSecurityGroup",
-    "ParameterValue":"sg-03de01f6691335768"
+    "ParameterValue":"sg-0682b912ffaa44ec1"
   },
   {
     "ParameterKey":"ClusterName",
@@ -41,10 +41,10 @@
   },
   {
     "ParameterKey":"Subnets",
-    "ParameterValue":"subnet-08f5242abb874cba6,subnet-02180d691377426e2"
+    "ParameterValue":"subnet-072fe41a5bb572c4d,subnet-03081608c746a16b6"
   },
   {
     "ParameterKey":"VpcId",
-    "ParameterValue":"vpc-07a111e80ca79d453"
+    "ParameterValue":"vpc-0e35c347dfb69d9d1"
   }
 ]

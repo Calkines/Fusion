@@ -371,8 +371,8 @@ Resources:
         blabla: owned
         Key2: Value2
       Subnets:
-        - subnet-08f5242abb874cba6
-        - subnet-02180d691377426e2
+        - subnet-072fe41a5bb572c4d
+        - subnet-03081608c746a16b6        
     DependsOn:
       - "NodeInstanceRole"
       - "NodeLaunchTemplate"
