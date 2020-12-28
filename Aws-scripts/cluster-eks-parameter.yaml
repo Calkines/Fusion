@@ -1,50 +1,22 @@
 [
   {
     "ParameterKey":"ClusterControlPlaneSecurityGroup",
-    "ParameterValue":"sg-0682b912ffaa44ec1"
+    "ParameterValue":"sg-0408536438688b9ca"
+  },
+  {
+    "ParameterKey":"NodeSecurityGroup",
+    "ParameterValue":"sg-0769863c365ebdd98"
   },
   {
     "ParameterKey":"ClusterName",
     "ParameterValue":"EKS-ITAONDE"
   },
   {
-    "ParameterKey":"KeyName",
-    "ParameterValue":"EC2-KeyPair"
-  },
-  {
-    "ParameterKey":"NodeAutoScalingGroupDesiredCapacity",
-    "ParameterValue":"2"
-  },
-  {
-    "ParameterKey":"NodeAutoScalingGroupMaxSize",
-    "ParameterValue":"5"
-  },
-  {
-    "ParameterKey":"NodeAutoScalingGroupMinSize",
-    "ParameterValue":"0"
-  },
-  {
-    "ParameterKey":"NodeGroupName",
-    "ParameterValue":"NodeGroup-EKS-ITAONDE"
-  },
-  {
-    "ParameterKey":"NodeImageIdSSMParam",
-    "ParameterValue":"/eks/ami/id"
-  },
-  {
-    "ParameterKey":"NodeInstanceType",
-    "ParameterValue":"t2.micro"
-  },
-  {
-    "ParameterKey":"NodeVolumeSize",
-    "ParameterValue":"20"
-  },
-  {
     "ParameterKey":"Subnets",
-    "ParameterValue":"subnet-072fe41a5bb572c4d,subnet-03081608c746a16b6"
+    "ParameterValue":"subnet-0dec3608d66bfb41c,subnet-0059d34fa5db9d399"
   },
   {
     "ParameterKey":"VpcId",
-    "ParameterValue":"vpc-0e35c347dfb69d9d1"
+    "ParameterValue":"vpc-0b3e14d0ad18c653d"
   }
 ]
