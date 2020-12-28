@@ -55,7 +55,7 @@ Resources:
           - sts:AssumeRole
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
-        
+
   #Role usada pelos Workers Nodes
   NodeInstanceRole:
     Type: "AWS::IAM::Role"
@@ -66,7 +66,7 @@ Resources:
           - Effect: Allow
             Principal:
               Service:
-                - !FindInMap [ServicePrincipals, !Ref "AWS::Partition", ec2]
+                - ec2.amazonaws.com
             Action:
               - "sts:AssumeRole"
       ManagedPolicyArns:
