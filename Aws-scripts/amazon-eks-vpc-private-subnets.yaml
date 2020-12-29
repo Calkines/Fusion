@@ -283,25 +283,25 @@ Resources:
         CidrIp: 0.0.0.0/0        
       VpcId: !Ref VPC
 
-  NodeSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: Cluster communication with worker nodes, Control Plane Security Group
-      SecurityGroupIngress:
-      - IpProtocol: tcp
-        FromPort: 443
-        ToPort: 443
-        CidrIp: 0.0.0.0/0
-      - IpProtocol: tcp
-        FromPort: 1025
-        ToPort: 65535
-        CidrIp: 0.0.0.0/0        
-      SecurityGroupEgress:
-      - IpProtocol: -1
-        FromPort: 0
-        ToPort: 65535
-        CidrIp: 0.0.0.0/0
-      VpcId: !Ref VPC
+  # NodeSecurityGroup:
+  #   Type: AWS::EC2::SecurityGroup
+  #   Properties:
+  #     GroupDescription: Cluster communication with worker nodes, Control Plane Security Group
+  #     SecurityGroupIngress:
+  #     - IpProtocol: tcp
+  #       FromPort: 443
+  #       ToPort: 443
+  #       CidrIp: 0.0.0.0/0
+  #     - IpProtocol: tcp
+  #       FromPort: 1025
+  #       ToPort: 65535
+  #       CidrIp: 0.0.0.0/0        
+  #     SecurityGroupEgress:
+  #     - IpProtocol: -1
+  #       FromPort: 0
+  #       ToPort: 65535
+  #       CidrIp: 0.0.0.0/0
+  #     VpcId: !Ref VPC
 
 Outputs:
 

@@ -1,22 +1,42 @@
 [
   {
     "ParameterKey":"ClusterControlPlaneSecurityGroup",
-    "ParameterValue":"sg-0408536438688b9ca"
-  },
-  {
-    "ParameterKey":"NodeSecurityGroup",
-    "ParameterValue":"sg-0769863c365ebdd98"
-  },
+    "ParameterValue":"sg-0d109bd430762efa7"
+  },  
   {
     "ParameterKey":"ClusterName",
     "ParameterValue":"EKS-ITAONDE"
   },
   {
     "ParameterKey":"Subnets",
-    "ParameterValue":"subnet-0dec3608d66bfb41c,subnet-0059d34fa5db9d399"
+    "ParameterValue":"subnet-0ee4b1f7b6a952d69,subnet-0bdf4cfec37ae4569"
   },
   {
     "ParameterKey":"VpcId",
-    "ParameterValue":"vpc-0b3e14d0ad18c653d"
+    "ParameterValue":"vpc-0ffa94da2a224a523"
+  },
+  {
+    "ParameterKey":"NodeGroupName",
+    "ParameterValue":"MeuNodeGroup"
+  },
+  {
+    "ParameterKey":"NodeAutoScalingGroupMinSize",
+    "ParameterValue":"1"
+  },
+  {
+    "ParameterKey":"NodeAutoScalingGroupMaxSize",
+    "ParameterValue":"3"
+  },
+  {
+    "ParameterKey":"NodeAutoScalingGroupDesiredCapacity",
+    "ParameterValue":"2"
+  },
+  {
+    "ParameterKey":"KeyName",
+    "ParameterValue":"EC2-KeyPair"
+  },
+  {
+    "ParameterKey":"BootstrapArguments",
+    "ParameterValue":""
   }
 ]
