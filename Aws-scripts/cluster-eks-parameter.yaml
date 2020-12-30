@@ -1,7 +1,7 @@
 [
   {
     "ParameterKey":"ClusterControlPlaneSecurityGroup",
-    "ParameterValue":"sg-0d109bd430762efa7"
+    "ParameterValue":"sg-0522d55160858dc68"
   },  
   {
     "ParameterKey":"ClusterName",
@@ -9,11 +9,15 @@
   },
   {
     "ParameterKey":"Subnets",
-    "ParameterValue":"subnet-0ee4b1f7b6a952d69,subnet-0bdf4cfec37ae4569"
+    "ParameterValue":"subnet-0e897c4018719a0a3,subnet-0b91992a97806d0aa"
+  },
+  {
+    "ParameterKey":"SubnetsCluster",
+    "ParameterValue":"subnet-0361ac95c2443c8cc,subnet-0869d3c4701388953,subnet-0e897c4018719a0a3,subnet-0b91992a97806d0aa"
   },
   {
     "ParameterKey":"VpcId",
-    "ParameterValue":"vpc-0ffa94da2a224a523"
+    "ParameterValue":"vpc-098c6be5b453b0ec2"
   },
   {
     "ParameterKey":"NodeGroupName",
@@ -25,11 +29,11 @@
   },
   {
     "ParameterKey":"NodeAutoScalingGroupMaxSize",
-    "ParameterValue":"3"
+    "ParameterValue":"5"
   },
   {
     "ParameterKey":"NodeAutoScalingGroupDesiredCapacity",
-    "ParameterValue":"2"
+    "ParameterValue":"3"
   },
   {
     "ParameterKey":"KeyName",
@@ -38,5 +42,9 @@
   {
     "ParameterKey":"BootstrapArguments",
     "ParameterValue":""
+  },
+  {
+    "ParameterKey":"NodeInstanceType",
+    "ParameterValue":"m5.xlarge"
   }
 ]

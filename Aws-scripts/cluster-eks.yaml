@@ -25,6 +25,10 @@ Parameters:
     Type: "List<AWS::EC2::Subnet::Id>"
     Description: The subnets where workers can be created.
 
+  SubnetsCluster:
+    Type: "List<AWS::EC2::Subnet::Id>"
+    Description: All subnets available in Cluster
+
   VpcId:
     Type: "AWS::EC2::VPC::Id"
     Description: The VPC of the worker instances
@@ -49,7 +53,7 @@ Parameters:
     
   NodeImageIdSSMParam:
     Type: "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>"
-    Default: /aws/service/eks/optimized-ami/1.17/amazon-linux-2/recommended/image_id
+    Default: /aws/service/eks/optimized-ami/1.18/amazon-linux-2/amazon-eks-node-1.18-v20201126/image_id
     Description: AWS Systems Manager Parameter Store parameter of the AMI ID for the worker node instances. Change this value to match the version of Kubernetes you are using.
   
   NodeImageId:
@@ -106,8 +110,8 @@ Resources:
       RoleArn: !GetAtt eksClusterRole.Arn
       ResourcesVpcConfig:
         SecurityGroupIds:
-          - !Ref ClusterControlPlaneSecurityGroup
-        SubnetIds: !Ref Subnets
+          - !Ref ClusterControlPlaneSecurityGroup        
+        SubnetIds: !Ref SubnetsCluster
     DependsOn:
       - "eksClusterRole"
 
@@ -231,15 +235,7 @@ Resources:
   NodeLaunchTemplate:
     Type: "AWS::EC2::LaunchTemplate"
     Properties:
-      LaunchTemplateData:
-        BlockDeviceMappings:
-          - DeviceName: /dev/xvda
-            Ebs:
-              DeleteOnTermination: true
-              VolumeSize: !Ref NodeVolumeSize
-              VolumeType: gp2
-        IamInstanceProfile:
-          Arn: !GetAtt NodeInstanceProfile.Arn
+      LaunchTemplateData:        
         ImageId: !If
           - HasNodeImageId
           - !Ref NodeImageId
@@ -265,29 +261,47 @@ Resources:
             - required
             - optional
 
-  NodeGroup:
-    Type: "AWS::AutoScaling::AutoScalingGroup"
-    Properties:
-      DesiredCapacity: !Ref NodeAutoScalingGroupDesiredCapacity
-      LaunchTemplate:
-        LaunchTemplateId: !Ref NodeLaunchTemplate
+  # NodeGroup:
+  #   Type: "AWS::AutoScaling::AutoScalingGroup"
+  #   Properties:
+  #     DesiredCapacity: !Ref NodeAutoScalingGroupDesiredCapacity
+  #     LaunchTemplate:
+  #       LaunchTemplateId: !Ref NodeLaunchTemplate
+  #       Version: !GetAtt NodeLaunchTemplate.LatestVersionNumber
+  #     MaxSize: !Ref NodeAutoScalingGroupMaxSize
+  #     MinSize: !Ref NodeAutoScalingGroupMinSize
+  #     Tags:
+  #       - Key: Name
+  #         PropagateAtLaunch: true
+  #         Value: !Sub ${ClusterName}-${NodeGroupName}-Node
+  #       - Key: !Sub kubernetes.io/cluster/${ClusterName}
+  #         PropagateAtLaunch: true
+  #         Value: owned
+  #     VPCZoneIdentifier: !Ref Subnets
+  #   UpdatePolicy:
+  #     AutoScalingRollingUpdate:
+  #       MaxBatchSize: 1
+  #       MinInstancesInService: !Ref NodeAutoScalingGroupDesiredCapacity
+  #       PauseTime: PT5M
+  #   DependsOn:
+  #     - "eksItaonde"
+  
+  EksNodeGroup:
+    Type: AWS::EKS::Nodegroup
+    Properties:      
+      ClusterName: !Ref ClusterName      
+      LaunchTemplate: 
+        Id: !Ref NodeLaunchTemplate
         Version: !GetAtt NodeLaunchTemplate.LatestVersionNumber
-      MaxSize: !Ref NodeAutoScalingGroupMaxSize
-      MinSize: !Ref NodeAutoScalingGroupMinSize
-      Tags:
-        - Key: Name
-          PropagateAtLaunch: true
-          Value: !Sub ${ClusterName}-${NodeGroupName}-Node
-        - Key: !Sub kubernetes.io/cluster/${ClusterName}
-          PropagateAtLaunch: true
-          Value: owned
-      VPCZoneIdentifier: !Ref Subnets
-    UpdatePolicy:
-      AutoScalingRollingUpdate:
-        MaxBatchSize: 1
-        MinInstancesInService: !Ref NodeAutoScalingGroupDesiredCapacity
-        PauseTime: PT5M
+      NodegroupName: !Ref NodeGroupName
+      NodeRole: !GetAtt NodeInstanceRole.Arn      
+      ScalingConfig: 
+        DesiredSize: 3
+        MaxSize: 5
+        MinSize: 1
+      Subnets: !Ref Subnets      
     DependsOn:
+      - "NodeLaunchTemplate"
       - "eksItaonde"
 
 Outputs:
@@ -312,6 +326,6 @@ Outputs:
     Description: The security group for the node group
     Value: !Ref NodeSecurityGroup
   
-  NodeAutoScalingGroup:
-    Description: The autoscaling group
-    Value: !Ref NodeGroup
+  # NodeAutoScalingGroup:
+  #   Description: The autoscaling group
+  #   Value: !Ref NodeGroup
