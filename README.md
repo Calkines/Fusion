@@ -34,6 +34,14 @@ Permissões para Helm. O Fusion permite a instalação de pacotes pelo Help usan
 
 (necessário pesquisar mais sobre o assunto e melhorar este trecho).
 
+O Fusion pode ser instalado através do comando `helm install f5 --repo https://charts.lucidworks.com/ --insecure-skip-tls-verify fusion --namespace fusion-ns --create-namespace`.
+
+### Metric Server
+
+Caso você deseje consultar as metricas do seu Cluster para saber qual o uso de memória e processador dos nós, por exemplo, você precisa instalar o Metrics Server. Mais detalhes podem ser encontrados neste link: (Metric Server, Kubernetes)[https://kubernetes.io/docs/tasks/debug-application-cluster/resource-metrics-pipeline/].
+
+O comando para instalação básica da versão 0.4.1 é: `kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.4.1/components.yaml`.
+
 
 
 
